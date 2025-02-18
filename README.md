@@ -11,3 +11,8 @@ and
 $ deactivate
 ```
 to exit
+
+
+## TODO
+
+save users on database and check for already existing user with the same email
