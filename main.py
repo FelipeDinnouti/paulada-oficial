@@ -1,25 +1,10 @@
 from fasthtml.common import *
 from dataclasses import dataclass
+import pages
 
 # Form dataclass, basically the object that is used as standard for the database
 @dataclass
 class User: email:str; password:str; gender:bool; # 0 (False) is male, 1 is female 
-
-profile_form = Form(method="post")  (
-        Fieldset(
-            Label('Email', Input(name="email")),
-            Label("Senha", Input(name="password", type="password")),
-            Label("Gênero", Input(name="gender", type = "checkbox")),
-        ),
-        Button("Cadastro", type="submit"),
-    )
-login_form = Form(method="post")(
-    Fieldset(
-        Label("Email", Input(name="email")),
-        Label("Senha", Input(name="password", type="password"))
-    ),
-    Button("Login", type="submit"),
-)
 
 # Database
 db = database("users.db")
@@ -31,16 +16,20 @@ def register_user(email: str, password: str, gender: bool):
     users.insert(user)
 
 def fetch_user(email: str, password: str):
+    if not email in users:
+        return -2 # User has not been registered, does not exist
+
     user = users[email] # Email is the primary key
-    if not user:
-        return -2 # User doesn't exist
+
     if user.password != password: # Very secure password
         return -1 # User exists but wrong password
     
     return user
 
-# User authentication
+# Redirects, 303 prevents POST (fixes 405 error i think)
 login_redirect = RedirectResponse('/login', status_code=303)
+profile_redirect = RedirectResponse('/perfil', status_code=303)
+home_redirect = RedirectResponse('/', status_code=303)
 
 # Checks if the user is authenticated by checking the session information
 def user_auth_before(request, session):
@@ -54,19 +43,22 @@ beforeware = Beforeware(
 )
 
 # FastAPI app
-app, rt = fast_app(debug=True, before=beforeware)
+app, rt = fast_app(
+    debug=True,
+    before=beforeware
+    )
 
 @app.get("/")
 def home():
-    return Titled("Paulada Oficial", P("È hora da paulada"), A("Cadastro", href = "/cadastro"), Br(), A("Login", href="/login"), Br(), A("Perfil", href="/perfil"))
+    return pages.home
 
 @rt("/cadastro")
 def get():
-    return Titled("Faça seu cadastro", profile_form)
+    return pages.register
 
 @rt("/login")
 def get():
-    return Titled(f"Faça seu login", login_form)
+    return pages.login
 
 # Receives the login information and sets the auth variable in the session
 @app.route("/login", methods=['post'])
@@ -77,15 +69,22 @@ def post(email: str, password: str, session):
     if user == -2:
         return Titled("Esse email nao foi cadastrado nao")
 
-    session.setdefault("auth",email)
-    return Titled(f"Gênero: {user.gender}")
+    session["auth"] = (email, password)
+    return profile_redirect
 
 
 @rt("/perfil")
 def get(session):
-    email = session.get("auth")
+    email, password = session.get("auth")
 
-    return Titled(f"Perfil de {email}")
+    user = fetch_user(email, password)
+
+    return Div(
+        pages.header,
+        H2(f"Perfil de {email}"),
+        P(f"Gênero: {user.gender}"),
+        cls="container"
+    )
 
 # Receives the register information and creates an entry in the database
 @app.route("/cadastro", methods=['post'])
@@ -97,10 +96,10 @@ def post(email: str, password: str, gender: bool): # Variable position must matc
     print(f"email: {email}\npassword: {password}\ngender: {gender}")
     register_user(email, password, gender)
      
-    return home() # Go to home page
+    return home_redirect
 
 @rt("/about")
 def get():
-    return Titled("De fato, nós exisitimos", P("meu nome é japonês"))
+    return pages.about
 
 serve()
