@@ -1,5 +1,9 @@
 from fasthtml.common import *
 
+# Text Importing
+home_page_main_text_file = open("assets/texts/MainPage.md", "r")
+home_page_main_text = home_page_main_text_file.read()
+
 register_form = Form(method="post")  (
         Fieldset(
             Label('Email', Input(name="email")),
@@ -16,16 +20,6 @@ login_form = Form(method="post")(
     Button("Login", type="submit"),
 )
 
-home_page = (Titled("Paulada Oficial", 
-                    P("È hora da paulada"), 
-                    A("Cadastro", href = "/cadastro"), 
-                    Br(), 
-                    A("Login", href="/login"), 
-                    Br(), 
-                    A("Perfil", href="/perfil"),
-                    )        
-            )
-
 navigation = Div(
     A("Cadastro", href = "/cadastro"), 
     A("Login", href="/login"), 
@@ -36,14 +30,14 @@ navigation = Div(
 header = Div(
         H1("Paulada Oficial", style="padding: 24px 0px; display: inline-block; margin: 0px"),    
         navigation,
-        A(style="height: 65px; width: 105px; display: inline-block;  background-image: url('assets/icons/logo.svg'); background-size: cover", href="/"),
-        style="display: flex; justify-content: space-between; align-items: center;"
+        A(id="logo_link", href="/"),
+        id="header_div",
         )
 
 
 home = Div(
             header,
-            P("""De fato, um esporte completamente verídico."""),
+            Div(home_page_main_text,cls="marked"),
             cls="container",
         )
 

@@ -42,14 +42,20 @@ beforeware = Beforeware(
     skip=[r'/favicon\.ico', r'/static/.*', r'.*\.css', r'.*\.js', '/login', '/', '/about', '/cadastro']
 )
 
+hdrs = (MarkdownJS(), Link(rel="stylesheet", href="assets/css/mystyle.css"))
+
 # FastAPI app
 app, rt = fast_app(
     debug=True,
-    before=beforeware
+    before=beforeware,
+    hdrs=hdrs
     )
 
 @app.get("/")
 def home():
+    pages.home_page_main_text = pages.home_page_main_text_file.read() # Hot update the markdown (for live editing)
+    print("Reloaded -------------------------------")
+
     return pages.home
 
 @rt("/cadastro")
