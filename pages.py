@@ -24,15 +24,14 @@ navigation = Div(
     A("Cadastro", href = "/cadastro"), 
     A("Login", href="/login"), 
     A("Perfil", href="/perfil"),
-    style="display: flex; justify-content: space-evenly; width: 40%",
+    id="navigation",
 )
 
-header = Div(
+header = Div(Div(
         H1("Paulada Oficial", style="padding: 24px 0px; display: inline-block; margin: 0px"),    
-        navigation,
         A(id="logo_link", href="/"),
         id="header_div",
-        )
+        ), navigation)
 
 
 home = Div(
