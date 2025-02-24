@@ -8,6 +8,8 @@ Bem-vindo à *Organização de Paulada Oficial (OPO)!* Aqui, você descobrirá u
 
 A Paulada é um esporte de combate um contra um, onde dois adversários se enfrentam usando espadas improvisadas, geralmente feitas de madeira leve ou cabos de vassoura. O objetivo principal é simples, porém desafiador: acertar a parte inferior do corpo do oponente (pernas, joelhos, canelas ou pés) para marcar pontos. A simplicidade das regras esconde uma camada profunda de estratégia, exigindo movimentos rápidos, esquivas precisas e ataques calculados.
 
+A parte da explicação técnica, o verdadeiro objetivo da paulada é ser um esporte com uma barreira de entrada baixa, para que qualquer um possa participar e se divertir. De fato o verdadeiro objetivo é a comunhão, *e a verdadeira paulada são os amigos que a gente faz no caminho.*
+
 ## Regras Básicas
 
 *Nota: **A segurança é prioridade.** Recomendamos a supervisão de um árbitro em combates oficiais e o uso de equipamentos adequados.*
@@ -58,4 +60,5 @@ Seja você um competidor ávido ou um iniciante curioso, a Paulada oferece um de
 
 Prepare sua espada, ajuste sua estratégia e prepare-se para paulada.
 
-### 🔹 Organização de Paulada Oficial – Onde cada golpe é um passo para a glória! 🔹
+*Organização de Paulada Oficial (OPO)*
+*Promovendo comunhão, estratégia e fair play desde 2025.*

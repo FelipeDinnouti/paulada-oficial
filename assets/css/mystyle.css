@@ -6,7 +6,7 @@
     padding: 32px; 
     margin: 1em 0px 0px 0px; 
     border-radius: 32px 32px 0px 0px; 
-    background-color: #1b202b;
+    background-color: #232441;
 }
 
 #logo_link {
@@ -14,8 +14,15 @@
     width: 105px; 
 
     display: inline-block;  
-    background-image: url('../icons/logo.svg'); /*  Link is relative to this file  */
+    background-image: url('../icons/pauladaicone.png'); /*  Link is relative to this file  */
     background-size: cover;
+}
+
+#main_title {
+    padding: 24px 0px; 
+    display: inline-block; 
+    margin: 0px;
+    font-size: 2em;
 }
 
 #logo_title {
@@ -29,5 +36,49 @@
     justify-content: space-evenly; 
     width: 100%;
     padding: 1em;
-    margin-bottom: 3em;
+
+    border: 1px solid #303161;
+    border-style: none solid none solid;
+}
+
+#main_section {
+    padding: 2em 3em;
+    margin-bottom: 1em;
+
+    border: 1px solid #303161;
+    border-radius: 0px 0px 16px 10px;
+    border-style: none solid solid solid;
+}
+
+
+html {
+    background-color: #1b1e34;
+}
+
+#input_field {
+    margin-bottom: 4px;
+}
+
+#input_label {
+    margin-top: 16px;
+}
+
+.navlink {
+    color: white;
+    font-size: large;
+}
+
+.form_error_message {
+    color: rgb(219, 99, 99);
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        max-width: 100%;
+    }
 }
