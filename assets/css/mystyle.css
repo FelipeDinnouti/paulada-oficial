@@ -11,7 +11,7 @@
 
 #logo_link {
     height: 65px; 
-    width: 105px; 
+    width: 110px; 
 
     display: inline-block;  
     background-image: url('../icons/pauladaicone.png'); /*  Link is relative to this file  */
@@ -74,11 +74,40 @@ html {
     font-style: italic;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .container {
         margin: 0px;
         padding: 0px;
         width: 100%;
         max-width: 100%;
     }
+}
+
+@media (max-width: 500px) {
+    #logo_link {
+        max-width: 71px;
+        max-height: 44px;
+    }
+}
+
+@keyframes fade {
+    from { transform: scale(0.5); }
+    to { transform: scale(1.0); }
+}
+
+.marked * {
+    transform: scale(0.7);
+    opacity: 0.5;
+    transition: opacity 0.5s, transform 0.5s;
+    transition-timing-function: cubic-bezier();
+}
+
+.visible * {
+    transform: scale(1.0);
+    opacity: 1.0;
+}
+
+.visible {
+    transform: scale(1.0);
+    opacity: 1.0;
 }

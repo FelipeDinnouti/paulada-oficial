@@ -33,7 +33,7 @@ login_form = Form(method="post",)(
     Button("Login", type="submit", href="/"),
 )
 logout_form = Form(method="post",)(
-    Button("Logout", type="submit", href="/", style="width: 20%; background-color: #c2042f; border-color: #970222")
+    Button("Logout", type="submit", href="/", style="width: 20%; background-color: #c2042f; border-color: #970222; min-width: 90px")
 )
 
 navigation = Div(
@@ -52,9 +52,10 @@ header = Div(Div(
         ), navigation)
 
 home = Div(
-            header,
-            Div(home_page_main_text,cls="marked", id="main_section"),Titled(""),
-            cls="container",
+        
+        header,
+        Div(home_page_main_text,cls="marked", id="main_section"),Titled(""),
+        cls="container",
 )
 
 forum = Div(

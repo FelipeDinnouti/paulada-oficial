@@ -19,6 +19,10 @@ GENDER_WOMAN_STR = "woman"
 GENDER_MEN = False
 GENDER_WOMAN = True
 
+MAX_NAME_LENGTH = 254
+MAX_PASSWORD_LENGTH = 32
+MAX_EMAIL_LENGTH = 254
+
 # User register handling
 def register_user(name: str, email: str, password: str, gender: bool):
     salt = bcrypt.gensalt()
@@ -56,10 +60,10 @@ beforeware = Beforeware(
     skip=[r'.*\.png',r'/favicon\.ico', r'/static/.*', r'.*\.css', r'.*\.js', '/login', '/', '/about', '/cadastro', '/regras']
 )
 
-hdrs = (MarkdownJS(), Link(rel="stylesheet", href="assets/css/mystyle.css"), Script(src="assets/scripts/title.js")) 
+hdrs = (MarkdownJS(), Link(rel="stylesheet", href="assets/css/mystyle.css"), Script(src="assets/scripts/jquery-3_7_1_min.js"),Script(src="assets/scripts/visible.js"), Script(src="assets/scripts/title.js"),) 
 
 # FastAPI app
-app, rt = fast_app(
+app, rt = fast_app( 
     debug=True,
     before=beforeware,
     hdrs=hdrs
@@ -131,6 +135,15 @@ def get(session):
 # Receives the register information and creates an entry in the database
 @app.route("/cadastro", methods=['post'])
 def post(name: str, email: str, password: str, gender: str, session): # Variable position must match form input index
+    if len(name) > MAX_NAME_LENGTH:
+        return Titled("Nome grande demais") 
+    
+    if len(email) > MAX_EMAIL_LENGTH:
+        return Titled("Ninguém tem um email desse tamanho")
+    
+    if len(password) > MAX_PASSWORD_LENGTH:
+        return Titled("Você não precisa de mais de 32 caracteres na sua senha")
+    
     user = fetch_user(email, password)
     if user != -2: # User DOES exist
         return Titled("Já existe esse usuário ai meu")
