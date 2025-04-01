@@ -1,3 +1,169 @@
+/* Pico Overrides*/
+
+[data-theme="dark"],
+:root:not([data-theme="light"]) {
+  --background-color: #04080F;
+}
+
+/* My Rules: Default Properties (overwriten by @media) */
+
+#main_page_logo_text {
+    position: absolute;
+    font-size: 0.5em;   
+
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#main_page_logo_svg {
+    aspect-ratio: 1.618;
+    height: 26vh;
+    width: 42vh;
+}
+
+#main_page_logo {
+    height: fit-content;
+    width: fit-content;
+
+    text-align: center;
+    font-size: 15vh;
+
+    margin: auto;
+    margin-bottom: 20vh;
+}
+
+/* Header*/
+
+#navigation_header {
+    margin: 0 auto;
+    margin-bottom: 15vh;
+
+    display: flex; 
+    justify-content: space-between; 
+    align-items: baseline;
+    
+    width: 100%;
+    padding: 1em 0em;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+    align-items: baseline;
+
+}
+
+#header_login {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+    align-items: baseline;
+}
+
+#register_navlink {
+    border-radius: 8px;
+    border: 1px solid #fff;
+    padding: 0.4em;
+}
+
+.desktop_navlink {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+
+    position: absolute;
+    display: none;
+}
+.hamburger_button {
+    display: block;
+    background-color: transparent;
+    border: 0px;
+}
+.hamburger_button::-moz-focus-inner {
+    border: 0px;
+}
+
+.fixed_navlink {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+}
+
+/* Treats as mobile */
+@media (min-width: 576px) {
+    #main_page_logo_text { 
+        font-size: 0.58em;
+        top: 37.5%;
+    }
+    #main_page_logo_svg {
+        height: 30vh;
+        width: 48.54vh;
+    }
+    .desktop_navlink {
+        color: white;
+        font-size: large;
+        text-decoration: none;
+
+        position: absolute;
+        display: none;
+    }
+    .hamburger_button {
+        display: block;
+    }
+}
+
+/* Treats as desktop */
+@media (min-width: 768px) {
+    #main_page_logo_text { 
+        font-size: 0.68em;
+        top: 42%;
+    }
+    #main_page_logo_svg {
+        height: 37vh;
+        width: 60vh;
+    }
+    #navigation_header {
+        margin: 0 auto;
+        margin-bottom: 15vh;
+
+        width: 100%;
+        padding: 1em;
+    }
+    .desktop_navlink {
+        color: white;
+        font-size: large;
+        text-decoration: none;
+        display: block;
+        position: relative;
+    }
+    .hamburger_button {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    #main_page_logo_text { 
+        font-size: 0.7em;
+    }
+   
+}
+@media (min-width: 1280px) {
+    
+}
+@media (min-width: 1536px) {
+    
+}
+
+#main_section {
+    padding: 2em 3em;
+    margin-bottom: 1em;
+}
+
+
+/* Old Css*/ 
+
 #header_div {
     display: flex; 
     justify-content: space-between; 
@@ -6,7 +172,6 @@
     padding: 32px; 
     margin: 1em 0px 0px 0px; 
     border-radius: 32px 32px 0px 0px; 
-    background-color: #232441;
 }
 
 #logo_link {
@@ -31,29 +196,6 @@
     margin: 0px;
 }
 
-#navigation {
-    display: flex; 
-    justify-content: space-evenly; 
-    width: 100%;
-    padding: 1em;
-
-    border: 1px solid #303161;
-    border-style: none solid none solid;
-}
-
-#main_section {
-    padding: 2em 3em;
-    margin-bottom: 1em;
-
-    border: 1px solid #303161;
-    border-radius: 0px 0px 16px 10px;
-    border-style: none solid solid solid;
-}
-
-
-html {
-    background-color: #1b1e34;
-}
 
 #input_field {
     margin-bottom: 4px;
@@ -63,10 +205,7 @@ html {
     margin-top: 16px;
 }
 
-.navlink {
-    color: white;
-    font-size: large;
-}
+
 
 .form_error_message {
     color: rgb(219, 99, 99);
@@ -95,7 +234,7 @@ html {
     to { transform: scale(1.0); }
 }
 
-.marked * {
+.appearing * {
     transform: scale(0.7);
     opacity: 0.5;
     transition: opacity 0.5s, transform 0.5s;

@@ -8,7 +8,7 @@ import bcrypt
 class User: name: str; email:str; password:str; gender:bool; # 0 (False) is male, 1 is female 
 
 # Database
-db = database("users.db")
+db = database("staging-users.db")
 users = db.create(User, pk="email")
 
 for u in users():
@@ -60,10 +60,17 @@ beforeware = Beforeware(
     skip=[r'.*\.png',r'/favicon\.ico', r'/static/.*', r'.*\.css', r'.*\.js', '/login', '/', '/about', '/cadastro', '/regras']
 )
 
-hdrs = (MarkdownJS(), Link(rel="stylesheet", href="assets/css/mystyle.css"), Script(src="assets/scripts/jquery-3_7_1_min.js"),Script(src="assets/scripts/visible.js"), Script(src="assets/scripts/title.js"),) 
+hdrs = (MarkdownJS(), 
+        Link(rel="stylesheet", 
+        href="assets/css/mystyle.css"),
+        Link(rel="stylesheet", href="assets/css/pico-main/css/pico.css",), 
+        Script(src="assets/scripts/jquery-3_7_1_min.js"),
+        Script(src="assets/scripts/visible.js"), 
+        Script(src="assets/scripts/title.js"),) 
 
 # FastAPI app
 app, rt = fast_app( 
+    pico=False,
     debug=True,
     before=beforeware,
     hdrs=hdrs
@@ -171,4 +178,4 @@ def logout(session):
 def get():
     return pages.about
 
-serve(port=38001)
+serve(port=5001)
