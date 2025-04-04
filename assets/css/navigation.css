@@ -1,0 +1,134 @@
+/* Header*/
+
+#navigation_header {
+    margin: 0 auto;
+    margin-top: 0px;
+
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    
+    width: 100%;
+    padding: 1em 0em;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+    align-items:center;
+    height: 100%;
+}
+
+#logo_link {
+    aspect-ratio: 1.618;
+    height: 2em; 
+    width: auto; 
+
+    display: inline-block;  
+    background-image: url('../icons/pauladaicone.png'); /*  Link is relative to this file  */
+    background-size: cover;
+}
+
+#header_login {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+    align-items: baseline;
+}
+
+#register_navlink {
+    border-radius: 8px;
+    border: 1px solid #fff;
+    padding: 0.4em;
+}
+
+.desktop_navlink {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+
+    position: absolute;
+    display: none;
+}
+.hamburger_button {
+    display: block;
+    background-color: transparent;
+    border: 0px;
+}
+.hamburger_button::-moz-focus-inner {
+    border: 0px;
+}
+
+.fixed_navlink {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+}
+
+/**/
+
+/* Treats as mobile */
+
+@media (max-width: 768px) {
+    #main_page_logo_text { 
+        font-size: 0.58em;
+        top: 37.5%;
+    }
+    #main_page_logo_svg {
+        height: 30vh;
+        width: 48.54vh;
+    }
+    .desktop_navlink {
+        color: white;
+        font-size: large;
+        text-decoration: none;
+
+        position: absolute;
+        display: none;
+    }
+    .hamburger_button {
+        display: block;
+    }
+}
+
+/* RESPONSIVENESS HANDLING */
+
+
+@media (min-width: 768px) { /**/
+    #main_page_logo_text { 
+        font-size: 0.68em;
+        top: 42%;
+    }
+    #main_page_logo_svg {
+        height: 37vh;
+        width: 60vh;
+    }
+    #navigation_header {
+        width: 100%;
+        padding: 1em;
+    }
+    .desktop_navlink {
+        color: white;
+        font-size: large;
+        text-decoration: none;
+        display: block;
+        position: relative;
+    }
+    .hamburger_button {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    #main_page_logo_text { 
+        font-size: 0.7em;
+    }
+   
+}
+@media (min-width: 1280px) {
+    
+}
+@media (min-width: 1536px) {
+    
+}

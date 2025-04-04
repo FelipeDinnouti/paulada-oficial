@@ -1,5 +1,10 @@
 from fasthtml.common import *
 
+# Functions
+
+def Spacer(height: Int, type: str ="px"):
+    return Div(style=f"height: {height}{type}")
+
 # Content: Markdown converted to html, which is in turn converted to FastHTML (using the extension)
 home_page_main_content = Div(
     H2("O Esporte de Combate Estratégico que Desafia Corpo e Mente", cls='visible'),
@@ -108,8 +113,6 @@ home_page_main_content = Div(
     cls="appearing"
 )
 
-
-
 home_page_main_text_file = open("assets/texts/MainPage.md", "r")
 home_page_main_text = home_page_main_text_file.read()
 
@@ -120,26 +123,30 @@ INVALID_EMAIL_ERROR = "E-mail inválido"
 ALREADY_USED_EMAIL_ERROR = "E-mail já foi cadastrado"
 ALREADY_USED_NAME_ERROR = "Nome já está em uso"
 
+# ----------------- COMPONENTS ---------------------
+ 
 register_form = Form(method="post")  ( 
-        Fieldset(
-            Label("Nome", Input(name="name", placeholder="bota seu nome aqui", id="input_field"), id="input_label"),
-            Label("", cls="form_error_message", id="name_error"),
+    Fieldset(
+        Label("Nome", Input(name="name", placeholder="bota seu nome aqui", id="input_field"), id="input_label"),
+        Label("", cls="form_error_message", id="name_error"),
 
-            Label('E-mail', Input(name="email", placeholder="exemplodaora@gmail.com", id="input_field"), id="input_label"),
-            Label("", cls="form_error_message", id="email_error"),
+        Label('E-mail', Input(name="email", placeholder="exemplodaora@gmail.com", id="input_field"), id="input_label"),
+        Label("", cls="form_error_message", id="email_error"),
 
-            Label("Senha", Input(name="password", type="password", placeholder="nao vou contar pra ninguem", id="input_field"), id="input_label"),
-            Label("Gênero"),
-            Select(Option("Homem", value="men"), Option("Mulher", value="woman"),name="gender", type = "checkbox", style="width: 12em; height: 2em"),
-        ),
-        Button("Cadastro", type="submit"),
-    ) 
+        Label("Senha", Input(name="password", type="password", placeholder="nao vou contar pra ninguem", id="input_field"), id="input_label"),
+        Label("Gênero"),
+        Select(Option("Homem", value="men"), Option("Mulher", value="woman"),name="gender", type = "checkbox", style="width: 12em; height: 2em"),
+    ),
+    Button("Cadastro", type="submit"),
+    cls="generic_form"
+) 
 login_form = Form(method="post",)(
     Fieldset(
         Label("Email", Input(name="email", placeholder="E-mail", id="input_field"), id="input_label" ),
         Label("Senha", Input(name="password", type="password", placeholder="Senha", id="input_field"), id="input_label")
     ),
     Button("Login", type="submit", href="/"),
+    cls="generic_form",
 )
 logout_form = Form(method="post",)(
     Button("Logout", type="submit", href="/", style="width: 20%; background-color: #c2042f; border-color: #970222; min-width: 90px")
@@ -153,11 +160,13 @@ hamburger_button = Button(
 
 navigation = Div(
     hamburger_button,
-    A("Login", href="/login", cls="desktop_navlink"), 
-    A("Perfil", href="/perfil", cls="desktop_navlink"),
+    A(id="logo_link", href="/"),
+
+    A("Home", href="/", cls="desktop_navlink"),
     A("Regras", href="/regras", cls="desktop_navlink"),
     A("Novidades", href="/novidades", cls="desktop_navlink"),
-    A("Home", href="/", cls="desktop_navlink"),
+    A("Fórum", href="forum", cls="desktop_navlink"),
+
     id="navigation"
 )
 
@@ -180,11 +189,7 @@ header = Div(Div(
         id="header_div",
 ), navigation)
 
-# home = Div(
-#         header,
-#         Div(home_page_main_text,cls="marked", id="main_section"),Titled(""),
-#         cls="container",
-# )
+##  ------------------- PAGES 
 
 forum = Div(
     header,
@@ -198,22 +203,28 @@ rules = Div(
 )
 
 login = Div(
-        header,
+        navigation_header,
+        Spacer(4, "em"),
         Div(
-        login_form,
-            Div(
-                A("Cadastro", href = "/cadastro"),
-                style="text-align: center",
-            ),
-            id="main_section",
+            H1("Faça seu Login", cls="main_title"),
+            H3("Bem vindo de volta!", cls="main_title"),
+            
+            login_form,
+                Div(
+                    A("Cadastro", href = "/cadastro"),
+                    style="text-align: center",
+                ),
+                id="main_section",
         ),
-        cls="container"
+        cls="container",
 )
 
 register = Div(
-        header,
+        navigation_header,
+        Spacer(4, "em"),
         Div(
-        H2("Faça seu cadastro"),
+        H1("Faça seu cadastro", cls="main_title"),
+        H3("Entre no mundo da Paulada!", cls="main_title"),
         register_form,
         id="main_section",
         ),

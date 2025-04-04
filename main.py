@@ -61,8 +61,18 @@ beforeware = Beforeware(
 )
 
 hdrs = (MarkdownJS(), 
-        Link(rel="stylesheet", 
-        href="assets/css/mystyle.css"),
+        Link(
+            rel="stylesheet", 
+        href="assets/css/mystyle.css"
+        ),
+        Link(
+            rel="stylesheet", 
+        href="assets/css/navigation.css"
+        ),
+        Link(
+            rel="stylesheet", 
+        href="assets/css/login.css"
+        ),
         Link(rel="stylesheet", href="assets/css/pico-main/css/pico.css",), 
         Script(src="assets/scripts/jquery-3_7_1_min.js"),
         Script(src="assets/scripts/visible.js"), 
