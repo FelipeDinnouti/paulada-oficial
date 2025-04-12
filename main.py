@@ -49,18 +49,24 @@ login_redirect = RedirectResponse('/login', status_code=303)
 profile_redirect = RedirectResponse('/perfil', status_code=303)
 home_redirect = RedirectResponse('/', status_code=303)
 
+
 # Checks if the user is authenticated by checking the session information
 def user_auth_before(request, session):
     auth = request.scope['auth'] = session.get('auth', None)
     if not auth: return login_redirect
 
+# Pages allowed to visit without login
+whitelisted_pages = ['/login', '/', '/about', '/cadastro', '/regras']
+
+
 # Runs right before changing pages
 beforeware = Beforeware(
     user_auth_before,
-    skip=[r'.*\.png',r'/favicon\.ico', r'/static/.*', r'.*\.css', r'.*\.js', '/login', '/', '/about', '/cadastro', '/regras']
+    skip=[r'.*\.png',r'/favicon\.ico', r'/static/.*', r'.*\.css', r'.*\.js',] + whitelisted_pages
 )
 
-hdrs = (MarkdownJS(), 
+hdrs = (
+    MarkdownJS(), 
         Link(
             rel="stylesheet", 
         href="assets/css/mystyle.css"
@@ -83,14 +89,25 @@ app, rt = fast_app(
     pico=False,
     debug=True,
     before=beforeware,
-    hdrs=hdrs
+    hdrs=hdrs,
+    title="Recebill"
     )
 
+
+# Routing
 @app.get("/")
 def home():
     pages.home_page_main_text_file = open("assets/texts/MainPage.md", "r")
     pages.home_page_main_text = pages.home_page_main_text_file.read() # Hot update the markdown (for live editing)
     return pages.home
+
+@app.get("/forum")
+def forum():
+    return pages.forum
+
+@app.get("/novidades")
+def news():
+    return pages.news
 
 @rt("/regras")
 def get():

@@ -192,12 +192,22 @@ header = Div(Div(
 ##  ------------------- PAGES 
 
 forum = Div(
-    header,
-    H2("Paulada Forum"),
+    navigation_header,
+    Spacer(4, "em"),
+    H2("Paulada Forum", cls="main_title"),
+    H4("não implementei ainda kkkk", cls="main_title"),
+    cls="container"
+)
+
+news = Div(
+    navigation_header,
+    Spacer(4, "em"),
+    H2("Novidades", cls="main_title"),
+    cls="container"
 )
 
 rules = Div(
-    header,
+    navigation_header,
     Div(rules_main_text, cls="marked", id="main_section"),
     cls="container",
 )
@@ -230,8 +240,6 @@ register = Div(
         ),
         cls="container",
     )
-
-# Design V2
 
 home = Div(
     navigation_header,
