@@ -8,7 +8,7 @@ import bcrypt
 class User: name: str; email:str; password:str; gender:bool; # 0 (False) is male, 1 is female 
 
 # Database
-db = database("staging-users.db")
+db = database("data/staging-users.db")
 users = db.create(User, pk="email")
 
 for u in users():
