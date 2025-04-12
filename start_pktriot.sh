@@ -1,1 +1,0 @@
-./../../../falkun/Desktop/Miscelanea/pktriot-0.15.5/pktriot start
